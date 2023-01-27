@@ -1,58 +1,26 @@
-const container = document.getElementById('bingo-container');
-let bingoRows = [5];
-let bingoGrid = [5];
-for (let i = 0; i < 5; i++) { bingoRows[i] = false; }
-for (let i = 0; i < 5; i++) { bingoGrid[i] = bingoRows; }
 let debug = false;
 
-
-const handleCell = function (cell) {
-    let cellId = cell.target.id;
-
-    let row = Math.floor(cellId/5);
-    let col = cellId%5;
-    if (debug) console.log("row: " + row + " col: " + col);
-    bingoGrid[row][col] = true;
-
-    for (let i = 0; i < 5; i++) {
-        for (let j = 0; j < 5; j++) {
-            if (debug) console.log(bingoGrid[i][j]);
-            if (bingoGrid[i][j] === true) {
-                if (cell.target.className !== 'bingo-cell-selected') {
-                    cell.target.classList.add('bingo-cell-selected');
-                }
-            }
-        }
-    }
-}
-
-container.addEventListener('click', handleCell);
-
-function generateGrid() {
-    let size = 5
-    const genGrid = [size];
-    const genRows = [size];
-    for (let i = 0; i < size; i++) {
-        genGrid[i] = [size];
-        genRows[i] = document.createElement('div');
-        genRows[i].className = 'bingo-row';
-        for (let j = 0; j < size; j++) {
-            genGrid[i][j] = document.createElement('div');
-            genGrid[i][j].className = 'bingo-cell';
-            genGrid[i][j].id = 5*i + j;
-            genGrid[i][j].innerHTML = 5*i + j;
-            genRows[i].appendChild(genGrid[i][j]);
-        }
-        container.appendChild(genRows[i]);
-    }
-
-    for (let i = 0; i < size; i++) {
-        for (let j = 0; j < size; j++) {
-            bingoGrid[i][j] = false;
-        }
-    }
-}
-
 window.onload = function () {
-    generateGrid();
+	let container = document.getElementById("bingo-container");
+	for (let row = 0; row < 5; row++) {
+		let rowDiv = document.createElement("div");
+		this.setupStyle(rowDiv, "bingo-row", "bingo-row-" + row);
+		for (let col = 0; col < 5; col++) {
+			let colDiv = document.createElement("div");
+			this.setupStyle(colDiv, "bingo-cell", "cell-" + row + "-" + col);
+			colDiv.addEventListener("click", (e) => click(e, row, col));
+			rowDiv.appendChild(colDiv);
+		}
+		container.appendChild(rowDiv);
+	}
+}
+
+function setupStyle(div, clazz, id) {
+	div.classList.add(clazz);
+	div.id = id;
+}
+
+function click(e, row, col) {
+	if (debug) console.log("row: " + row + " col: " + col);
+	e.target.classList.toggle("bingo-cell-selected");
 }
