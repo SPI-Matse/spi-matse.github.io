@@ -1,47 +1,46 @@
-.bingoContainer {
+.bingo-container {
     border: 2px solid #000000;
     margin: 0;
     padding: 0;
     border-radius: 17px;
 }
 
-.bingoRow {
+.bingo-row {
     display: flex;
     margin: 0;
     padding: 0;
 }
 
-.bingoCell {
+.bingo-cell {
     border: 2px solid #000000;
     background: #CCCCCC;
     margin: 0;
     padding: 0;
     height: 15vh;
     width: 15vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.bingoContainer>.bingoRow:first-child>.bingoCell:first-child {
+.bingo-container>.bingo-row:first-child>.bingo-cell:first-child {
     border-top-left-radius: 15px;
 }
-.bingoContainer>.bingoRow:first-child>.bingoCell:last-child {
+.bingo-container>.bingo-row:first-child>.bingo-cell:last-child {
     border-top-right-radius: 15px;
 }
-.bingoContainer>.bingoRow:last-child>.bingoCell:first-child {
+.bingo-container>.bingo-row:last-child>.bingo-cell:first-child {
     border-bottom-left-radius: 15px;
 }
-.bingoContainer>.bingoRow:last-child>.bingoCell:last-child {
+.bingo-container>.bingo-row:last-child>.bingo-cell:last-child {
     border-bottom-right-radius: 15px;
 }
 
-.bingoCellActive {
+.bingo-cell-selected {
     background: #FF0000;
 }
 
-.bingoCell:hover {
+.bingo-cell:hover {
     background: lightcoral;
     transition: background 0.25s;
 }

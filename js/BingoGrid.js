@@ -1,4 +1,4 @@
-const container = document.getElementById('bingoContainer');
+const container = document.getElementById('bingo-container');
 let bingoRows = [5];
 let bingoGrid = [5];
 for (let i = 0; i < 5; i++) { bingoRows[i] = false; }
@@ -18,8 +18,8 @@ const handleCell = function (cell) {
         for (let j = 0; j < 5; j++) {
             if (debug) console.log(bingoGrid[i][j]);
             if (bingoGrid[i][j] === true) {
-                if (cell.target.className !== 'bingoCellSelected') {
-                    cell.target.classList.add('bingoCellSelected');
+                if (cell.target.className !== 'bingo-cell-selected') {
+                    cell.target.classList.add('bingo-cell-selected');
                 }
             }
         }
@@ -35,10 +35,10 @@ function generateGrid() {
     for (let i = 0; i < size; i++) {
         genGrid[i] = [size];
         genRows[i] = document.createElement('div');
-        genRows[i].className = 'bingoRow';
+        genRows[i].className = 'bingo-row';
         for (let j = 0; j < size; j++) {
             genGrid[i][j] = document.createElement('div');
-            genGrid[i][j].className = 'bingoCell';
+            genGrid[i][j].className = 'bingo-cell';
             genGrid[i][j].id = 5*i + j;
             genGrid[i][j].innerHTML = 5*i + j;
             genRows[i].appendChild(genGrid[i][j]);
