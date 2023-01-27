@@ -1,0 +1,54 @@
+.bingoContainer {
+    border: 2px solid #000000;
+    margin: 0;
+    padding: 0;
+    border-radius: 17px;
+}
+
+.bingoRow {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.bingoCell {
+    border: 2px solid #000000;
+    background: #CCCCCC;
+    margin: 0;
+    padding: 0;
+    height: 15vh;
+    width: 15vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bingoContainer>.bingoRow:first-child>.bingoCell:first-child {
+    border-top-left-radius: 15px;
+}
+.bingoContainer>.bingoRow:first-child>.bingoCell:last-child {
+    border-top-right-radius: 15px;
+}
+.bingoContainer>.bingoRow:last-child>.bingoCell:first-child {
+    border-bottom-left-radius: 15px;
+}
+.bingoContainer>.bingoRow:last-child>.bingoCell:last-child {
+    border-bottom-right-radius: 15px;
+}
+
+.bingoCellActive {
+    background: #FF0000;
+}
+
+.bingoCell:hover {
+    background: lightcoral;
+    transition: background 0.25s;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
