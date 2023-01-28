@@ -17,6 +17,7 @@
 	margin: 0;
 	padding: 0;
 	border-radius: 17px;
+	max-width: 77vh;
 }
 
 .bingo-row {
@@ -70,19 +71,17 @@
 }
 
 .card-container {
-	overflow: scroll;
-	border: 2px solid #000000;
-	flex-wrap: wrap;
-	margin: 0;
+	margin-left: 5vw;
 	padding: 0;
+	border: 2px solid #000000;
 	border-radius: 17px;
+	width: calc(17vw + 4px);
+	max-height: 77vh;
+	overflow-y: scroll;
 }
 
-.card-container > .bingo-card {
-	border: 2px solid #000000;
+.bingo-card {
 	background: #0000FF;
-	margin: 0;
-	padding: 0;
 	height: 15vh;
 	width: 15vh;
 	display: flex;
@@ -90,12 +89,21 @@
 	justify-content: center;
 }
 
-.bingo-card {
+.card-container > .bingo-card {
+	border: 2px solid #000000;
 	background: #0000FF;
-	margin: 0;
-	padding: 0;
-	height: 15vh;
-	width: 15vh;
+	height: 5vh;
+	width: 17vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.card-container > .bingo-card:hover {
+	border: 2px solid #000000;
+	background: #0059FF;
+	height: 5vh;
+	width: 17vw;
 	display: flex;
 	align-items: center;
 	justify-content: center;
