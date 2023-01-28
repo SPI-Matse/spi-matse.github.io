@@ -54,11 +54,11 @@
 }
 
 .bingo-cell-selected {
-	background: #FF0000;
+	background: #0000FF;
 }
 
 .bingo-cell:hover {
-	background: lightcoral;
+	background: #59CDFF;
 	transition: background 0.25s;
 }
 
@@ -67,4 +67,36 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.card-container {
+	overflow: scroll;
+	border: 2px solid #000000;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	border-radius: 17px;
+}
+
+.card-container > .bingo-card {
+	border: 2px solid #000000;
+	background: #0000FF;
+	margin: 0;
+	padding: 0;
+	height: 15vh;
+	width: 15vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bingo-card {
+	background: #0000FF;
+	margin: 0;
+	padding: 0;
+	height: 15vh;
+	width: 15vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
