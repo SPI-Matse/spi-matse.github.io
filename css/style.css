@@ -12,6 +12,16 @@
 	}
 }
 
+:root {
+	margin: 0;
+	padding: 0;
+	--cell-width: 15vh;
+	--cell-height: 15vh;
+	--container-radius: 17px;
+	--card-width: 17vw;
+	--card-height: 5vh;
+}
+
 .header {
 	margin-left: 1vw;
 	font-size: 125%;
@@ -21,7 +31,6 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;
 }
 
 .footer {
@@ -29,49 +38,39 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;
 }
 
 .bingo-container {
 	border: 2px solid #000000;
-	margin: 0;
-	padding: 0;
-	border-radius: 17px;
+	border-radius: var(--container-radius);
 	max-width: 77vh;
 }
 
 .bingo-row {
 	display: flex;
-	margin: 0;
-	padding: 0;
 }
 
 .bingo-cell {
 	border: 2px solid #000000;
 	background: #CCCCCC;
-	margin: 0;
-	padding: 0;
-	height: 15vh;
-	width: 15vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	width: var(--cell-width);
+	height: var(--cell-height);
 }
 
 .bingo-container > .bingo-row:first-child > .bingo-cell:first-child {
-	border-top-left-radius: 15px;
+	border-top-left-radius: calc(var(--container-radius) - 2px);
 }
 
 .bingo-container > .bingo-row:first-child > .bingo-cell:last-child {
-	border-top-right-radius: 15px;
+	border-top-right-radius: calc(var(--container-radius) - 2px);
 }
 
 .bingo-container > .bingo-row:last-child > .bingo-cell:first-child {
-	border-bottom-left-radius: 15px;
+	border-bottom-left-radius: calc(var(--container-radius) - 2px);
 }
 
 .bingo-container > .bingo-row:last-child > .bingo-cell:last-child {
-	border-bottom-right-radius: 15px;
+	border-bottom-right-radius: calc(var(--container-radius) - 2px);
 }
 
 .bingo-cell-selected {
@@ -85,18 +84,17 @@
 
 .card-container {
 	margin-left: 5vw;
-	padding: 0;
 	border: 2px solid #000000;
-	border-radius: 17px;
-	width: calc(17vw + 4px);
+	border-radius: var(--container-radius);
+	width: calc(var(--card-width) + 4px);
 	max-height: 77vh;
 	overflow-y: scroll;
 }
 
 .bingo-card {
 	background: #0000FF;
-	height: 15vh;
-	width: 15vh;
+	width: var(--cell-width);
+	height: var(--cell-height);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -105,19 +103,13 @@
 .card-container > .bingo-card {
 	border: 2px solid #000000;
 	background: #0000FF;
-	height: 5vh;
-	width: 17vw;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	width: var(--card-width);
+	height: var(--card-height);
 }
 
 .card-container > .bingo-card:hover {
 	border: 2px solid #000000;
 	background: #0059FF;
-	height: 5vh;
-	width: 17vw;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	width: var(--card-width);
+	height: var(--card-height);
 }
