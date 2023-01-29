@@ -1,14 +1,27 @@
 @media (prefers-color-scheme: dark) {
-	body {
-		background: #2D2D2D;
-		color: #CCCCCC;
+	:root {
+		--color-background: #231F20;
+		--color-grid-background: #CCC;
+		--color-font: #F2EFEA;
+		--color-highlight1: #7389AE;
+		--color-highlight1-light: #A4B4CB;
+		--color-highlight1-dark: #3C4E68;
+		--color-highlight2: #E71D36;
+		--color-highlight3: #FF9F1C;
 	}
 }
 
+
 @media (prefers-color-scheme: light) {
-	body {
-		background: #FFFFFF;
-		color: #000000;
+	:root {
+		--color-background: #F2EFEA;
+		--color-grid-background: #CCC;
+		--color-font: #231F20;
+		--color-highlight1: #7389AE;
+		--color-highlight1-light: #A4B4CB;
+		--color-highlight1-dark: #3C4E68;
+		--color-highlight2: #E71D36;
+		--color-highlight3: #FF9F1C;
 	}
 }
 
@@ -20,6 +33,11 @@
 	--container-radius: 17px;
 	--card-width: 17vw;
 	--card-height: 5vh;
+}
+
+body {
+	background: var(--color-background);
+	color: var(--color-font);
 }
 
 .header {
@@ -41,7 +59,7 @@
 }
 
 .bingo-container {
-	border: 2px solid #000000;
+	border: 2px solid var(--color-highlight1-dark);
 	border-radius: var(--container-radius);
 	max-width: 77vh;
 }
@@ -51,8 +69,8 @@
 }
 
 .bingo-cell {
-	border: 2px solid #000000;
-	background: #CCCCCC;
+	border: 2px solid var(--color-highlight1-dark);
+	background: var(--color-grid-background);
 	width: var(--cell-width);
 	height: var(--cell-height);
 }
@@ -73,14 +91,18 @@
 	border-bottom-right-radius: calc(var(--container-radius) - 2px);
 }
 
+.bingo-cell-selected {
+	background: var(--color-highlight2);
+}
+
 .bingo-cell:hover {
-	background: #59CDFF;
+	background: radial-gradient(var(--color-highlight1-light) 30%, var(--color-grid-background));
 	transition: background 0.25s;
 }
 
 .card-container {
 	margin-left: 5vw;
-	border: 2px solid #000000;
+	border: 2px solid var(--color-highlight1-dark);
 	border-radius: var(--container-radius);
 	width: calc(var(--card-width) + 4px);
 	max-height: 77vh;
@@ -88,7 +110,7 @@
 }
 
 .bingo-card {
-	background: #0000FF;
+	background: var(--color-highlight1);
 	width: var(--cell-width);
 	height: var(--cell-height);
 	display: flex;
@@ -97,15 +119,22 @@
 }
 
 .card-container > .bingo-card {
-	border: 2px solid #000000;
-	background: #0000FF;
+	border: 2px solid var(--color-highlight1-dark);
+	background: var(--color-highlight1);
 	width: var(--card-width);
 	height: var(--card-height);
 }
 
+.bingo-cell-selected>.bingo-card{
+	background: var(--color-highlight2);
+}
+.bingo-cell-selected>.bingo-card:hover{
+	background: radial-gradient(var(--color-highlight1-light) 30%, var(--color-highlight2));
+}
+
 .card-container > .bingo-card:hover {
-	border: 2px solid #000000;
-	background: #0059FF;
+	border: 2px solid var(--color-highlight1-dark);
+	background: var(--color-highlight3);
 	width: var(--card-width);
 	height: var(--card-height);
 }
