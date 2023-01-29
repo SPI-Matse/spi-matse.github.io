@@ -68,6 +68,9 @@ function drop(event) {
 
 function contextMenu(event) {
 	event.preventDefault();
+	if (!editMode) {
+		return;
+	}
 	let card = document.getElementById(event.target.id);
 	if (card.className === "bingo-card") {
 		let cardContainer = document.getElementById("card-container");
