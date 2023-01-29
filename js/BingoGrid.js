@@ -3,6 +3,9 @@ let debug = false;
 window.onload = function () {
 	generateBingo();
 	generateCards();
+	document.getElementById("shuffle-button").addEventListener("click", (e) => clickShuffle(e));
+	document.getElementById("start-button").addEventListener("click", (e) => clickAction(e));
+	document.getElementById("reset-button").addEventListener("click", (e) => clickReset(e));
 }
 
 function generateBingo() {
@@ -81,3 +84,37 @@ function dragStart(event) {
 	event.dataTransfer.setData("ElementId", event.target.id);
 }
 
+function clickShuffle(event) {
+	let container = document.getElementById("card-container");
+	for (let i = 0; i < 25; i++) {
+		let cell = document.getElementById("cell-" + Math.floor(i / 5) + "-" + (i % 5));
+		if (cell.children.length === 0) {
+			function randomCard() {
+				let rng = Math.floor(Math.random() * (container.children.length + 1));
+				let element = container.children[rng];
+				if (element !== undefined) {
+					return element;
+				} else {
+					return randomCard();
+				}
+			}
+
+			let element = randomCard();
+			if (debug) console.log("element: " + element);
+			cell.appendChild(element);
+		}
+	}
+}
+
+function clickAction(event) {
+
+}
+
+function clickReset(event) {
+	for (let i = 0; i < 25; i++) {
+		let cell = document.getElementById("cell-" + Math.floor(i / 5) + "-" + (i % 5));
+		if (cell.children.length > 0) {
+			document.getElementById("card-container").appendChild(cell.children[0]);
+		}
+	}
+}
