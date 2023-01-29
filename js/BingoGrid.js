@@ -1,11 +1,12 @@
 let debug = false;
+let editMode = true;
 
 window.onload = function () {
 	generateBingo();
 	generateCards();
-	document.getElementById("shuffle-button").addEventListener("click", (e) => clickShuffle(e));
-	document.getElementById("start-button").addEventListener("click", (e) => clickAction(e));
-	document.getElementById("reset-button").addEventListener("click", (e) => clickReset(e));
+	document.getElementById("shuffle-button").addEventListener("click", () => clickShuffle());
+	document.getElementById("action-button").addEventListener("click", () => clickAction());
+	document.getElementById("reset-button").addEventListener("click", () => clickReset());
 }
 
 function generateBingo() {
@@ -16,7 +17,6 @@ function generateBingo() {
 		for (let col = 0; col < 5; col++) {
 			let colDiv = document.createElement("div");
 			setupStyle(colDiv, "bingo-cell", "cell-" + row + "-" + col);
-			colDiv.addEventListener("click", (e) => click(e, row, col));
 			colDiv.addEventListener("dragover", (e) => dragOver(e));
 			colDiv.addEventListener("drop", (e) => drop(e));
 			colDiv.addEventListener("contextmenu", (e) => contextMenu(e));
@@ -43,11 +43,6 @@ function generateCards() {
 function setupStyle(div, clazz, id) {
 	div.classList.add(clazz);
 	div.id = id;
-}
-
-function click(e, row, col) {
-	if (debug) console.log("row: " + row + " col: " + col);
-	e.target.classList.toggle("bingo-cell-selected");
 }
 
 function dragOver(event) {
@@ -84,7 +79,10 @@ function dragStart(event) {
 	event.dataTransfer.setData("ElementId", event.target.id);
 }
 
-function clickShuffle(event) {
+function clickShuffle() {
+	if (!editMode) {
+		return;
+	}
 	let container = document.getElementById("card-container");
 	for (let i = 0; i < 25; i++) {
 		let cell = document.getElementById("cell-" + Math.floor(i / 5) + "-" + (i % 5));
@@ -106,11 +104,33 @@ function clickShuffle(event) {
 	}
 }
 
-function clickAction(event) {
-
+function clickAction() {
+	if (editMode) {
+		document.getElementById("action-button").innerHTML = "Stop";
+		document.getElementById("reset-button").hidden = true;
+		document.getElementById("shuffle-button").hidden = true;
+		updateDraggable(false);
+		editMode = false;
+	} else {
+		document.getElementById("action-button").innerHTML = "Start";
+		document.getElementById("reset-button").hidden = false;
+		document.getElementById("shuffle-button").hidden = false;
+		updateDraggable(true);
+		editMode = true;
+	}
 }
 
-function clickReset(event) {
+function updateDraggable(value) {
+	let cards = document.getElementsByClassName("bingo-card");
+	for (let i = 0; i < cards.length; i++) {
+		cards[i].draggable = value;
+	}
+}
+
+function clickReset() {
+	if (!editMode) {
+		return;
+	}
 	for (let i = 0; i < 25; i++) {
 		let cell = document.getElementById("cell-" + Math.floor(i / 5) + "-" + (i % 5));
 		if (cell.children.length > 0) {

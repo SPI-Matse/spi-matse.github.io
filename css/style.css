@@ -73,10 +73,6 @@
 	border-bottom-right-radius: calc(var(--container-radius) - 2px);
 }
 
-.bingo-cell-selected {
-	background: #0000FF;
-}
-
 .bingo-cell:hover {
 	background: #59CDFF;
 	transition: background 0.25s;
