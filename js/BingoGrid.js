@@ -106,11 +106,15 @@ function clickShuffle() {
 
 function clickAction() {
 	if (editMode) {
-		document.getElementById("action-button").innerHTML = "Stop";
-		document.getElementById("reset-button").hidden = true;
-		document.getElementById("shuffle-button").hidden = true;
-		updateDraggable(false);
-		editMode = false;
+		if (!hasGridSpace()) {
+			document.getElementById("action-button").innerHTML = "Stop";
+			document.getElementById("reset-button").hidden = true;
+			document.getElementById("shuffle-button").hidden = true;
+			updateDraggable(false);
+			editMode = false;
+		} else {
+			alert("Please fill the entire grid before starting the game.");
+		}
 	} else {
 		document.getElementById("action-button").innerHTML = "Start";
 		document.getElementById("reset-button").hidden = false;
@@ -118,6 +122,16 @@ function clickAction() {
 		updateDraggable(true);
 		editMode = true;
 	}
+}
+
+function hasGridSpace() {
+	let cells = document.getElementsByClassName("bingo-cell");
+	for (let i = 0; i < cells.length; i++) {
+		if (cells[i].children.length === 0) {
+			return true;
+		}
+	}
+	return false;
 }
 
 function updateDraggable(value) {
