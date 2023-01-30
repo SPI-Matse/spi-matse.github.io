@@ -1,3 +1,9 @@
+/*
+ * Site-wide styles
+ * including the color palette for the site in light and dark mode.
+ */
+
+/* color palette */
 @media (prefers-color-scheme: dark) {
 	:root {
 		--color-background: #231F20;
@@ -8,6 +14,8 @@
 		--color-highlight1-dark: #3C4E68;
 		--color-highlight2: #E71D36;
 		--color-highlight3: #FF9F1C;
+		--color-highlight4: #04A777;
+		--color-highlight4-light: #06EFA9;
 	}
 }
 
@@ -21,9 +29,12 @@
 		--color-highlight1-dark: #3C4E68;
 		--color-highlight2: #E71D36;
 		--color-highlight3: #FF9F1C;
+		--color-highlight4: #04A777;
+		--color-highlight4-light: #06EFA9;
 	}
 }
 
+/* general page layout */
 :root {
 	margin: 0;
 	padding: 0;
@@ -57,23 +68,43 @@ body {
 	justify-content: center;
 }
 
+/*
+ * Style of the bingo grid
+ */
+
 .bingo-container {
 	border: 2px solid var(--color-highlight1-dark);
 	border-radius: var(--container-radius);
 	max-width: 77vh;
 }
 
+/* horizontal arrangement of the cells in a row */
 .bingo-row {
 	display: flex;
 }
 
+/* general style of the cells */
 .bingo-cell {
 	border: 2px solid var(--color-highlight1-dark);
 	background: var(--color-grid-background);
 	width: var(--cell-width);
 	height: var(--cell-height);
+	transition: background 0.25s;
 }
 
+.bingo-cell:hover {
+	background: var(--color-highlight1-light);
+}
+
+.bingo-cell-selected {
+	background: var(--color-highlight4);
+}
+
+.bingo-cell-selected:hover {
+	background: var(--color-highlight4-light);
+}
+
+/* round corners for the bingo cells */
 .bingo-container > .bingo-row:first-child > .bingo-cell:first-child {
 	border-top-left-radius: calc(var(--container-radius) - 2px);
 }
@@ -90,24 +121,11 @@ body {
 	border-bottom-right-radius: calc(var(--container-radius) - 2px);
 }
 
-.bingo-cell-selected {
-	background: var(--color-highlight2);
-}
+/*
+ * The following is for the bingo card.
+ */
 
-.bingo-cell:hover {
-	background: radial-gradient(var(--color-highlight1-light) 30%, var(--color-grid-background));
-	transition: background 0.25s;
-}
-
-.card-container {
-	margin-left: 5vw;
-	border: 2px solid var(--color-highlight1-dark);
-	border-radius: var(--container-radius);
-	width: calc(var(--card-width) + 4px);
-	max-height: 77vh;
-	overflow-y: scroll;
-}
-
+/* general card styles */
 .bingo-card {
 	background: var(--color-highlight1);
 	width: var(--cell-width);
@@ -117,19 +135,13 @@ body {
 	justify-content: center;
 }
 
+/* style specific for cars in the card-container */
 .card-container > .bingo-card {
 	border: 2px solid var(--color-highlight1-dark);
 	background: var(--color-highlight1);
 	width: var(--card-width);
 	height: var(--card-height);
-}
-
-.bingo-cell-selected > .bingo-card {
-	background: var(--color-highlight2);
-}
-
-.bingo-cell-selected > .bingo-card:hover {
-	background: radial-gradient(var(--color-highlight1-light) 30%, var(--color-highlight2));
+	transition: background 0.25s;
 }
 
 .card-container > .bingo-card:hover {
@@ -137,4 +149,41 @@ body {
 	background: var(--color-highlight3);
 	width: var(--card-width);
 	height: var(--card-height);
+}
+
+/* style specific for cars in the bingo-cells */
+.bingo-cell-selected > .bingo-card {
+	background: var(--color-highlight4);
+	transition: background 0.25s;
+}
+
+.bingo-cell-selected > .bingo-card:hover {
+	background: var(--color-highlight4-light);
+}
+
+/* round corners for the bingo cards in the corners of the grid */
+.bingo-container > .bingo-row:first-child > .bingo-cell:first-child > .bingo-card {
+	border-top-left-radius: calc(var(--container-radius) - 2px);
+}
+
+.bingo-container > .bingo-row:first-child > .bingo-cell:last-child > .bingo-card {
+	border-top-right-radius: calc(var(--container-radius) - 2px);
+}
+
+.bingo-container > .bingo-row:last-child > .bingo-cell:first-child > .bingo-card {
+	border-bottom-left-radius: calc(var(--container-radius) - 2px);
+}
+
+.bingo-container > .bingo-row:last-child > .bingo-cell:last-child > .bingo-card {
+	border-bottom-right-radius: calc(var(--container-radius) - 2px);
+}
+
+/* style of the card-container */
+.card-container {
+	margin-left: 5vw;
+	border: 2px solid var(--color-highlight1-dark);
+	border-radius: var(--container-radius);
+	width: calc(var(--card-width) + 4px);
+	max-height: 77vh;
+	overflow-y: scroll;
 }
