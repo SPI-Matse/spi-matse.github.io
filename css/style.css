@@ -15,6 +15,7 @@
 :root {
 	margin: 0;
 	padding: 0;
+	font-size: 18px;
 	--cell-width: 15vh;
 	--cell-height: 15vh;
 	--container-radius: 17px;
@@ -113,8 +114,10 @@
 
 .bingo-card-chopped-off {
 	background: #04A777;
+	color: #212121;
 }
 
 .bingo-card-chopped-off:hover {
 	background: #06EFA9;
+	color: #212121;
 }

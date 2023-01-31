@@ -99,6 +99,9 @@ function drop(event) {
 // if the bingo card is chopped off, the css class will be removed
 function contextMenu(event) {
 	event.preventDefault();
+	if (!editMode) {
+		return;
+	}
 	let card = document.getElementById(event.target.id);
 	if (card.classList.contains("bingo-card-chopped-off")) {
 		card.classList.remove("bingo-card-chopped-off");
