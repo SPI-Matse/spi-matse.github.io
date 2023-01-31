@@ -94,6 +94,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
 }
 
 .card-container > .bingo-card {
