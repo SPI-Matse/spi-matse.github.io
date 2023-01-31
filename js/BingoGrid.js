@@ -43,7 +43,7 @@ function generateCards() {
 	let container = document.getElementById("card-container");
 	container.addEventListener("dragover", (e) => dragOver(e));
 	container.addEventListener("drop", (e) => drop(e));
-	for (let i = 0; i < 25; i++) {
+	for (let i = 0; i < values.length; i++) {
 		let card = document.createElement("div");
 		this.setupStyle(card, "bingo-card", "bingo-card-" + i);
 		card.innerHTML = values[i];
