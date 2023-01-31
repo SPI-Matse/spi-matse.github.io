@@ -1,6 +1,8 @@
 let debug = false;
 let editMode = true;
 
+jsonString = '["Felix wird politisch","Ismael rastet in Mathe aus", "Nervöses zappeln", "SPI sind (zurecht) abgehoben", "Jemand schreit Bingo #rekursion", "Sushi", "Rechenfehler in den Mathe-Lösungen", "\\"Können wir die KA verschieben\\"", "\\"Dürfen wir gehen?\\"", "Dom, Luis & Caro sind zu laut", "\\"mehr oder weniger\\"", "Amalya ist zu spät", "Volle Motivation #FREE", "Klebesterne", "Irgendein Engel macht das Fenster zu", "Christian und Johanna verschwinden", "Andree kommt zu spät", "\\"Stellen sie sich vor\\"", "Irgendein Wichser macht das Fenster auf", "Bentele kommt zu spät", "Vincent meckert", "Rechtschreibfehler auf dem Mathe-AB", "Kellerkinder", "Früher aus", "\\"laser\\""]';
+
 // called when the page is loaded
 window.onload = function () {
 	generateBingo();
@@ -33,6 +35,8 @@ function generateCards() {
 	// load values from file into array
 	let values = [];
 	let xhr = new XMLHttpRequest();
+	/*
+	hotfix because wouldn't work on gh pages
 	xhr.open("GET", "/resources/Values.json", false);
 	xhr.send(null);
 	if (debug) console.log(xhr.responseText)
@@ -41,6 +45,9 @@ function generateCards() {
 	} else {
 		console.log("Error loading values.json");
 	}
+	 */
+	// hotfix:
+	values = JSON.parse(jsonString);
 
 	// generate cards from array and add them to the card container
 	let container = document.getElementById("card-container");
