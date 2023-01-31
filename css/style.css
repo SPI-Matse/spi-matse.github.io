@@ -74,7 +74,7 @@
 }
 
 .bingo-cell:hover {
-	background: #59CDFF;
+	background: #5CB6EB;
 	transition: background 0.25s;
 }
 
@@ -88,24 +88,25 @@
 }
 
 .bingo-card {
-	background: #0000FF;
+	background: #006494;
 	width: var(--cell-width);
 	height: var(--cell-height);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
 }
 
 .card-container > .bingo-card {
 	border: 2px solid #000000;
-	background: #0000FF;
+	background: #006494;
 	width: var(--card-width);
 	height: var(--card-height);
 }
 
 .card-container > .bingo-card:hover {
 	border: 2px solid #000000;
-	background: #0059FF;
+	background: #006494;
 	width: var(--card-width);
 	height: var(--card-height);
 }

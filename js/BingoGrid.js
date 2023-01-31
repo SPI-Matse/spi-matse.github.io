@@ -27,13 +27,26 @@ function generateBingo() {
 }
 
 function generateCards() {
+	//load values from Values.json into array
+	let values = [];
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "js/Values.json", false);
+	xhr.send(null);
+	console.log(xhr.responseText)
+	if (xhr.status === 200) {
+		values = JSON.parse(xhr.responseText);
+	} else {
+		console.log("Error loading values.json");
+	}
+
+	//generate cards
 	let container = document.getElementById("card-container");
 	container.addEventListener("dragover", (e) => dragOver(e));
 	container.addEventListener("drop", (e) => drop(e));
-	for (let i = 0; i < 25; i++) {
+	for (let i = 0; i < values.length; i++) {
 		let card = document.createElement("div");
 		this.setupStyle(card, "bingo-card", "bingo-card-" + i);
-		card.innerHTML = i.toString();
+		card.innerHTML = values[i];
 		card.draggable = true;
 		card.addEventListener("dragstart", (e) => dragStart(e));
 		container.appendChild(card);
