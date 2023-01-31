@@ -1,6 +1,7 @@
 let debug = false;
 let editMode = true;
 
+// called when the page is loaded
 window.onload = function () {
 	generateBingo();
 	generateCards();
@@ -9,6 +10,7 @@ window.onload = function () {
 	document.getElementById("reset-button").addEventListener("click", () => clickReset());
 }
 
+// generates the bingo grid
 function generateBingo() {
 	let container = document.getElementById("bingo-container");
 	for (let row = 0; row < 5; row++) {
@@ -26,20 +28,21 @@ function generateBingo() {
 	}
 }
 
+// loads the values from the json file and generates the cards
 function generateCards() {
-	//load values from Values.json into array
+	// load values from file into array
 	let values = [];
 	let xhr = new XMLHttpRequest();
-	xhr.open("GET", "js/Values.json", false);
+	xhr.open("GET", "/resources/Values.json", false);
 	xhr.send(null);
-	console.log(xhr.responseText)
+	if (debug) console.log(xhr.responseText)
 	if (xhr.status === 200) {
 		values = JSON.parse(xhr.responseText);
 	} else {
 		console.log("Error loading values.json");
 	}
 
-	//generate cards
+	// generate cards from array and add them to the card container
 	let container = document.getElementById("card-container");
 	container.addEventListener("dragover", (e) => dragOver(e));
 	container.addEventListener("drop", (e) => drop(e));
@@ -53,15 +56,18 @@ function generateCards() {
 	}
 }
 
+// set the class and id of a div
 function setupStyle(div, clazz, id) {
 	div.classList.add(clazz);
 	div.id = id;
 }
 
+// prevents the default drag over
 function dragOver(event) {
 	event.preventDefault();
 }
 
+// drops the card to the target element if the target is valid
 function drop(event) {
 	event.preventDefault();
 	let element = document.getElementById(event.dataTransfer.getData("ElementId"));
@@ -79,6 +85,7 @@ function drop(event) {
 	}
 }
 
+// disables the context menu and moves the card to the card container
 function contextMenu(event) {
 	event.preventDefault();
 	let card = document.getElementById(event.target.id);
@@ -88,10 +95,12 @@ function contextMenu(event) {
 	}
 }
 
+// sets the drag data to the id of the element
 function dragStart(event) {
 	event.dataTransfer.setData("ElementId", event.target.id);
 }
 
+// fills the bingo grid with random cards
 function clickShuffle() {
 	if (!editMode) {
 		return;
@@ -117,6 +126,7 @@ function clickShuffle() {
 	}
 }
 
+// toggle between edit mode and game mode
 function clickAction() {
 	if (editMode) {
 		if (!hasGridSpace()) {
@@ -137,6 +147,7 @@ function clickAction() {
 	}
 }
 
+// checks if there is any empty space in the grid
 function hasGridSpace() {
 	let cells = document.getElementsByClassName("bingo-cell");
 	for (let i = 0; i < cells.length; i++) {
@@ -147,6 +158,7 @@ function hasGridSpace() {
 	return false;
 }
 
+// updates the draggable property of all cards
 function updateDraggable(value) {
 	let cards = document.getElementsByClassName("bingo-card");
 	for (let i = 0; i < cards.length; i++) {
@@ -154,6 +166,7 @@ function updateDraggable(value) {
 	}
 }
 
+// clears the bingo grid and returns all cards to the card container
 function clickReset() {
 	if (!editMode) {
 		return;
