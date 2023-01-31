@@ -38,6 +38,7 @@
 :root {
 	margin: 0;
 	padding: 0;
+	font-size: 18px;
 	--cell-width: 15vh;
 	--cell-height: 15vh;
 	--container-radius: 17px;
@@ -133,6 +134,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
 }
 
 /* style specific for cars in the card-container */
