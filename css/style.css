@@ -77,6 +77,7 @@ body {
 	border: 2px solid var(--color-highlight1-dark);
 	border-radius: var(--container-radius);
 	max-width: 77vh;
+	height: fit-content;
 }
 
 /* horizontal arrangement of the cells in a row */
@@ -95,14 +96,6 @@ body {
 
 .bingo-cell:hover {
 	background: var(--color-highlight1-light);
-}
-
-.bingo-cell-selected {
-	background: var(--color-highlight4);
-}
-
-.bingo-cell-selected:hover {
-	background: var(--color-highlight4-light);
 }
 
 /* round corners for the bingo cells */
@@ -135,6 +128,8 @@ body {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	transition: background 0.25s;
+	border: 1px solid var(--color-highlight1-dark);
 }
 
 /* style specific for cars in the card-container */
@@ -153,31 +148,48 @@ body {
 	height: var(--card-height);
 }
 
-/* style specific for cars in the bingo-cells */
-.bingo-cell-selected > .bingo-card {
+/* style specific for cards in the bingo-cells */
+.bingo-card-chopped-off > .bingo-card {
 	background: var(--color-highlight4);
 	transition: background 0.25s;
 }
 
-.bingo-cell-selected > .bingo-card:hover {
+.bingo-card-chopped-off > .bingo-card:hover {
 	background: var(--color-highlight4-light);
+}
+
+/* hover effect for the bingo card in the bingo cell */
+.bingo-cell > .bingo-card:hover {
+	background: var(--color-highlight1-light);
+	color: var(--color-background);
+}
+
+/* style for chopped off bingo card in the bingo cell */
+.bingo-card.bingo-card-chopped-off {
+	background: var(--color-highlight4);
+	transition: background 0.25s;
+}
+
+.bingo-card.bingo-card-chopped-off:hover {
+	background: var(--color-highlight4-light);
+	color: var(--color-background);
 }
 
 /* round corners for the bingo cards in the corners of the grid */
 .bingo-container > .bingo-row:first-child > .bingo-cell:first-child > .bingo-card {
-	border-top-left-radius: calc(var(--container-radius) - 2px);
+	border-top-left-radius: calc(var(--container-radius) - 4px);
 }
 
 .bingo-container > .bingo-row:first-child > .bingo-cell:last-child > .bingo-card {
-	border-top-right-radius: calc(var(--container-radius) - 2px);
+	border-top-right-radius: calc(var(--container-radius) - 4px);
 }
 
 .bingo-container > .bingo-row:last-child > .bingo-cell:first-child > .bingo-card {
-	border-bottom-left-radius: calc(var(--container-radius) - 2px);
+	border-bottom-left-radius: calc(var(--container-radius) - 4px);
 }
 
 .bingo-container > .bingo-row:last-child > .bingo-cell:last-child > .bingo-card {
-	border-bottom-right-radius: calc(var(--container-radius) - 2px);
+	border-bottom-right-radius: calc(var(--container-radius) - 4px);
 }
 
 /* style of the card-container */
@@ -188,4 +200,26 @@ body {
 	width: calc(var(--card-width) + 4px);
 	max-height: 77vh;
 	overflow-y: scroll;
+}
+
+/*
+ * The following is for the buttons.
+ */
+button {
+	background-color: var(--color-highlight1);
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	border-radius: var(--container-radius);
+}
+
+button:hover {
+	background-color: var(--color-highlight3);
 }
