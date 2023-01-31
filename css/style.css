@@ -110,3 +110,11 @@
 	width: var(--card-width);
 	height: var(--card-height);
 }
+
+.bingo-card-chopped-off {
+	background: #04A777;
+}
+
+.bingo-card-chopped-off:hover {
+	background: #06EFA9;
+}

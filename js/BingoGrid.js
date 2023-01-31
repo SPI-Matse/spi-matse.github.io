@@ -52,6 +52,7 @@ function generateCards() {
 		card.innerHTML = values[i];
 		card.draggable = true;
 		card.addEventListener("dragstart", (e) => dragStart(e));
+		card.addEventListener("click", (e) => chopOffCard(e));
 		container.appendChild(card);
 	}
 }
@@ -68,27 +69,40 @@ function dragOver(event) {
 }
 
 // drops the card to the target element if the target is valid
+// if the bingo card is chopped off, the css class will be removed
 function drop(event) {
 	event.preventDefault();
-	let element = document.getElementById(event.dataTransfer.getData("ElementId"));
-	if (debug) console.log("parent id: " + element.parentElement.id + "target id: " + event.target.id);
-	if (element.parentElement.id === "card-container" && event.target.id.startsWith("cell-")) { // drag from card container to bingo grid
-		event.target.appendChild(element);
-	} else if (element.parentElement.id.startsWith("cell-")) { // drag from bingo grid
+	let card = document.getElementById(event.dataTransfer.getData("ElementId"));
+	if (debug) console.log("parent id: " + card.parentElement.id + "target id: " + event.target.id);
+	let validTarget = false;
+	if (card.parentElement.id === "card-container" && event.target.id.startsWith("cell-")) { // drag from card container to bingo grid
+		event.target.appendChild(card);
+		validTarget = true;
+	} else if (card.parentElement.id.startsWith("cell-")) { // drag from bingo grid
 		if (event.target.id === "card-container") { // to card container
-			event.target.appendChild(element);
+			event.target.appendChild(card);
+			validTarget = true;
 		} else if (event.target.id.startsWith("cell-")) { // to another cell
-			event.target.appendChild(element);
+			event.target.appendChild(card);
+			validTarget = true;
 		} else if (event.target.id.startsWith("bingo-card-") && event.target.parentElement.id === "card-container") { // to card container over a card
-			event.target.parentElement.insertBefore(element, event.target);
+			event.target.parentElement.insertBefore(card, event.target);
+			validTarget = true;
 		}
+	}
+	if (validTarget && card.classList.contains("bingo-card-chopped-off")) {
+		card.classList.remove("bingo-card-chopped-off");
 	}
 }
 
 // disables the context menu and moves the card to the card container
+// if the bingo card is chopped off, the css class will be removed
 function contextMenu(event) {
 	event.preventDefault();
 	let card = document.getElementById(event.target.id);
+	if (card.classList.contains("bingo-card-chopped-off")) {
+		card.classList.remove("bingo-card-chopped-off");
+	}
 	if (card.className === "bingo-card") {
 		let cardContainer = document.getElementById("card-container");
 		cardContainer.insertBefore(card, cardContainer.firstChild);
@@ -98,6 +112,14 @@ function contextMenu(event) {
 // sets the drag data to the id of the element
 function dragStart(event) {
 	event.dataTransfer.setData("ElementId", event.target.id);
+}
+
+// toggles the copped off class of the card in game mode
+function chopOffCard(event) {
+	if (editMode) {
+		return;
+	}
+	event.target.classList.toggle("bingo-card-chopped-off");
 }
 
 // fills the bingo grid with random cards
@@ -167,6 +189,7 @@ function updateDraggable(value) {
 }
 
 // clears the bingo grid and returns all cards to the card container
+// if the bingo card is chopped off, the css class will be removed
 function clickReset() {
 	if (!editMode) {
 		return;
@@ -174,7 +197,11 @@ function clickReset() {
 	for (let i = 0; i < 25; i++) {
 		let cell = document.getElementById("cell-" + Math.floor(i / 5) + "-" + (i % 5));
 		if (cell.children.length > 0) {
-			document.getElementById("card-container").appendChild(cell.children[0]);
+			let card = cell.children[0];
+			if (card.classList.contains("bingo-card-chopped-off")) {
+				card.classList.remove("bingo-card-chopped-off");
+			}
+			document.getElementById("card-container").appendChild(card);
 		}
 	}
 }
