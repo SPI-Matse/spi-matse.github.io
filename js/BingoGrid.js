@@ -35,9 +35,11 @@ function generateCards() {
 	// load values from file into array
 	let values = [];
 	let xhr = new XMLHttpRequest();
-	/*
-	hotfix because wouldn't work on gh pages
-	xhr.open("GET", "/resources/Values.json", false);
+	if (debug) {
+		xhr.open("GET", "./resources/Values.json", false);
+	} else {
+		xhr.open("GET", "https://spi-matse.github.io/Project-Bingo/resources/Values.json", false);
+	}
 	xhr.send(null);
 	if (debug) console.log(xhr.responseText)
 	if (xhr.status === 200) {
@@ -45,9 +47,6 @@ function generateCards() {
 	} else {
 		console.log("Error loading values.json");
 	}
-	 */
-	// hotfix:
-	values = JSON.parse(jsonString);
 
 	// generate cards from array and add them to the card container
 	let container = document.getElementById("card-container");
