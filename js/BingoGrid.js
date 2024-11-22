@@ -38,7 +38,7 @@ function generateCards() {
 	if (debug) {
 		xhr.open("GET", "./resources/Values.json", false);
 	} else {
-		xhr.open("GET", "https://spi-matse.github.io/Project-Bingo/resources/Values.json", false);
+		xhr.open("GET", "https://kann-in-die-tonne.com/resources/Values.json", false);
 	}
 	xhr.send(null);
 	if (debug) console.log(xhr.responseText)
