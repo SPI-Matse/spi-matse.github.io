@@ -1,12 +1,15 @@
-let debug = false;
+let debug = true;
 let editMode = true;
+let jsonURL = "https://spi-matse.github.io/Project-Bingo/resources/Values.json";
+let jsonDebugURL = "./resources/Values.json";
 
-jsonString = '["Felix wird politisch","Ismael rastet in Mathe aus", "Nervöses zappeln", "SPI sind (zurecht) abgehoben", "Jemand schreit Bingo #rekursion", "Sushi", "Rechenfehler in den Mathe-Lösungen", "\\"Können wir die KA verschieben\\"", "\\"Dürfen wir gehen?\\"", "Dom, Luis & Caro sind zu laut", "\\"mehr oder weniger\\"", "Amalya ist zu spät", "Volle Motivation #FREE", "Klebesterne", "Irgendein Engel macht das Fenster zu", "Christian und Johanna verschwinden", "Andree kommt zu spät", "\\"Stellen sie sich vor\\"", "Irgendein Wichser macht das Fenster auf", "Bentele kommt zu spät", "Vincent meckert", "Rechtschreibfehler auf dem Mathe-AB", "Kellerkinder", "Früher aus", "\\"laser\\""]';
+let values = [["https://spi-matse.github.io/Project-Bingo/resources/Values.json", "./resources/Values.json", "KHS Bingo"], ["https://spi-matse.github.io/Project-Bingo/resources/GlaeserBingo.json", "./resources/GlaeserBingo.json", "Gläser Bingo"]]
 
 // called when the page is loaded
 window.onload = function () {
 	generateBingo();
 	generateCards();
+	document.getElementById("khs-option").setAttribute("selected", "selected");
 	document.getElementById("shuffle-button").addEventListener("click", () => clickShuffle());
 	document.getElementById("action-button").addEventListener("click", () => clickAction());
 	document.getElementById("reset-button").addEventListener("click", () => clickReset());
@@ -36,22 +39,36 @@ function generateCards() {
 	let values = [];
 	let xhr = new XMLHttpRequest();
 	if (debug) {
-		xhr.open("GET", "./resources/Values.json", false);
+		xhr.open("GET", jsonDebugURL, false);
 	} else {
-		xhr.open("GET", "https://kann-in-die-tonne.com/resources/Values.json", false);
+		xhr.open("GET", jsonURL, false);
 	}
 	xhr.send(null);
-	if (debug) console.log(xhr.responseText)
+	//if (debug) console.log(xhr.responseText)
 	if (xhr.status === 200) {
 		values = JSON.parse(xhr.responseText);
 	} else {
 		console.log("Error loading values.json");
 	}
 
-	// generate cards from array and add them to the card container
+
 	let container = document.getElementById("card-container");
-	container.addEventListener("dragover", (e) => dragOver(e));
-	container.addEventListener("drop", (e) => drop(e));
+	console.log(container.children.length);
+
+	//empty the container
+	if(container.children.length > 0){
+		while (container.firstChild) {
+			container.removeChild(container.firstChild);
+		}
+	}
+	else{
+		container.addEventListener("dragover", (e) => dragOver(e));
+		container.addEventListener("drop", (e) => drop(e));
+	}
+
+	let bingoContainer = document.getElementById("bingo-container");
+
+	// generate cards from array and add them to the card container
 	for (let i = 0; i < values.length; i++) {
 		let card = document.createElement("div");
 		this.setupStyle(card, "bingo-card", "bingo-card-" + i);
@@ -79,7 +96,7 @@ function dragOver(event) {
 function drop(event) {
 	event.preventDefault();
 	let card = document.getElementById(event.dataTransfer.getData("ElementId"));
-	if (debug) console.log("parent id: " + card.parentElement.id + "target id: " + event.target.id);
+	//if (debug) console.log("parent id: " + card.parentElement.id + "target id: " + event.target.id);
 	let validTarget = false;
 	if (card.parentElement.id === "card-container" && event.target.id.startsWith("cell-")) { // drag from card container to bingo grid
 		event.target.appendChild(card);
@@ -164,6 +181,7 @@ function clickAction() {
 			document.getElementById("action-button").innerHTML = "Stop";
 			document.getElementById("reset-button").hidden = true;
 			document.getElementById("shuffle-button").hidden = true;
+			document.getElementById("source-select").hidden = true;
 			updateDraggable(false);
 			editMode = false;
 		} else {
@@ -173,6 +191,7 @@ function clickAction() {
 		document.getElementById("action-button").innerHTML = "Start";
 		document.getElementById("reset-button").hidden = false;
 		document.getElementById("shuffle-button").hidden = false;
+		document.getElementById("source-select").hidden = false;
 		updateDraggable(true);
 		editMode = true;
 	}
@@ -212,5 +231,17 @@ function clickReset() {
 			}
 			document.getElementById("card-container").appendChild(card);
 		}
+	}
+}
+
+function changeValues(index){
+	console.log("changeValues " + index);
+	if(document != null) {
+		jsonURL = values[index][0];
+		jsonDebugURL = values[index][1];
+		document.getElementById("title").innerHTML = values[index][2];
+		document.getElementById("site-title").innerHTML = values[index][2];
+		clickReset();
+		generateCards();
 	}
 }

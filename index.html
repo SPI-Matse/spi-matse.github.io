@@ -2,14 +2,21 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>KHS Bingo</title>
+	<title id="site-title">KHS Bingo</title>
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="wrapper">
 	<div class="header">
-		<h1>KHS Bingo</h1>
+		<h1 id="title">KHS Bingo</h1>
 	</div>
+	<div class ="select" id ="source-select">
+		<select name="Source" id="source" onchange="changeValues(this.selectedIndex)">
+			<option value="khs" id="khs-option" selected>KHS</option>
+			<option value="glaeser">Gläser</option>
+		</select>
+	</div>
+
 	<div class="containers">
 		<div class="bingo-container" id="bingo-container"></div>
 		<div class="card-container" id="card-container"></div>
