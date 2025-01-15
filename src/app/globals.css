@@ -2,9 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #231F20;
+    --color-grid-background: #CCC;
+    --color-font: #F2EFEA;
+    --color-highlight1: #7389AE;
+    --color-highlight1-light: #A4B4CB;
+    --color-highlight1-dark: #3C4E68;
+    --color-highlight2: #E71D36;
+    --color-highlight3: lightcoral;
+    --color-highlight4: #04A777;
+    --color-highlight4-light: #06EFA9;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-background: #F2EFEA;
+    --color-grid-background: #CCC;
+    --color-font: #231F20;
+    --color-highlight1: #7389AE;
+    --color-highlight1-light: #A4B4CB;
+    --color-highlight1-dark: #3C4E68;
+    --color-highlight2: #E71D36;
+    --color-highlight3: lightcoral;
+    --color-highlight4: #04A777;
+    --color-highlight4-light: #06EFA9;
+  }
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  --cell-width: 15vh;
+  --cell-height: 15vh;
+  --container-radius: 17px;
+  --card-width: 17vw;
+  --card-height: 5vh;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-font);
+}
+
+.header {
+  margin-left: 1vw;
+  font-size: 125%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,4 +64,79 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/*bingo Style*/
+
+/* general style of the bingo board */
+.bingo-board {
+  border: 2px solid var(--color-highlight1-dark);
+  border-radius: var(--container-radius);
+  max-width: 77vh;
+  height: fit-content;
+}
+/* general style of the bingo row */
+.board-row {
+  display: flex;
+  justify-content: center;
+  background: var(--color-highlight1);
+}
+
+/* general style of the cells */
+.bingo-card-container {
+  border: 2px solid var(--color-highlight1-dark);
+  background: var(--color-grid-background);
+  width: var(--cell-width);
+  height: var(--cell-height);
+  transition: background 0.25s;
+}
+
+.bingo-card-container:hover {
+  background: var(--color-highlight1-light);
+}
+
+/* general style of the bingo cards themselvees */
+.bingo-card {
+  background: var(--color-highlight1);
+  width: var(--cell-width);
+  height: var(--cell-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background 0.25s;
+  border: 1px solid var(--color-highlight1-dark);
+}
+
+/* hover effect for the bingo card in the bingo cell */
+.bingo-cell > .bingo-card:hover {
+  background: var(--color-highlight1-light);
+  color: var(--color-background);
+}
+
+/* style for chopped off bingo card in the bingo cell */
+.bingo-card.bingo-card-chopped-off {
+  background: var(--color-highlight4);
+  transition: background 0.25s;
+}
+
+.bingo-card.bingo-card-chopped-off:hover {
+  background: var(--color-highlight4-light);
+  color: var(--color-background);
+}
+
+.bingo-container > .bingo-row:first-child > .bingo-cell:first-child > .bingo-card {
+  border-top-left-radius: calc(var(--container-radius) - 4px);
+}
+
+.bingo-container > .bingo-row:first-child > .bingo-cell:last-child > .bingo-card {
+  border-top-right-radius: calc(var(--container-radius) - 4px);
+}
+
+.bingo-container > .bingo-row:last-child > .bingo-cell:first-child > .bingo-card {
+  border-bottom-left-radius: calc(var(--container-radius) - 4px);
+}
+
+.bingo-container > .bingo-row:last-child > .bingo-cell:last-child > .bingo-card {
+  border-bottom-right-radius: calc(var(--container-radius) - 4px);
 }
