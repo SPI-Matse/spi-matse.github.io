@@ -145,6 +145,9 @@ function chopOffCard(event) {
 	if (editMode) {
 		return;
 	}
+	if (event.target.parentElement.id === "card-container") { // disable chopping off cards in card container (fixes #18)
+		return;
+	}
 	event.target.classList.toggle("bingo-card-chopped-off");
 }
 
@@ -168,7 +171,9 @@ function clickShuffle() {
 			}
 
 			let element = randomCard();
-			if (debug) console.log("element: " + element);
+			if (debug) {
+				console.log("element: " + element);
+			}
 			cell.appendChild(element);
 		}
 	}
