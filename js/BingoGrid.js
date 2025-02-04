@@ -9,7 +9,7 @@ let values = [["https://spi-matse.github.io/Project-Bingo/resources/Values.json"
 window.onload = function () {
 	generateBingo();
 	generateCards();
-	document.getElementById("source").options[0].selected = true;
+	document.getElementById("source").options[0].selected = true; // reset source select to default on reload (fixes #17)
 	document.getElementById("shuffle-button").addEventListener("click", () => clickShuffle());
 	document.getElementById("action-button").addEventListener("click", () => clickAction());
 	document.getElementById("reset-button").addEventListener("click", () => clickReset());
