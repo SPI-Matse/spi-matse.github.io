@@ -3,7 +3,7 @@ let editMode = true;
 let jsonURL = "https://spi-matse.github.io/Project-Bingo/resources/Values.json";
 let jsonDebugURL = "./resources/Values.json";
 
-let values = [["https://spi-matse.github.io/Project-Bingo/resources/Values.json", "./resources/Values.json", "KHS Bingo"], ["https://spi-matse.github.io/Project-Bingo/resources/GlaeserBingo.json", "./resources/GlaeserBingo.json", "Gläser Bingo"]]
+let values = [["https://spi-matse.github.io/Project-Bingo/resources/Values.json", "./resources/Values.json", "KHS Bingo"], ["https://spi-matse.github.io/Project-Bingo/resources/GlaeserBingo.json", "./resources/GlaeserBingo.json", "Gläser Bingo"]];
 
 // called when the page is loaded
 window.onload = function () {
@@ -13,7 +13,7 @@ window.onload = function () {
 	document.getElementById("shuffle-button").addEventListener("click", () => clickShuffle());
 	document.getElementById("action-button").addEventListener("click", () => clickAction());
 	document.getElementById("reset-button").addEventListener("click", () => clickReset());
-}
+};
 
 // generates the bingo grid
 function generateBingo() {
@@ -50,24 +50,22 @@ function generateCards() {
 	} else {
 		console.log("Error loading values.json");
 	}
-
-
+	
 	let container = document.getElementById("card-container");
 	console.log(container.children.length);
-
+	
 	//empty the container
-	if(container.children.length > 0){
+	if (container.children.length > 0) {
 		while (container.firstChild) {
 			container.removeChild(container.firstChild);
 		}
-	}
-	else{
+	} else {
 		container.addEventListener("dragover", (e) => dragOver(e));
 		container.addEventListener("drop", (e) => drop(e));
 	}
-
+	
 	let bingoContainer = document.getElementById("bingo-container");
-
+	
 	// generate cards from array and add them to the card container
 	for (let i = 0; i < values.length; i++) {
 		let card = document.createElement("div");
@@ -169,7 +167,6 @@ function clickShuffle() {
 					return randomCard();
 				}
 			}
-
 			let element = randomCard();
 			if (debug) {
 				console.log("element: " + element);
@@ -239,9 +236,11 @@ function clickReset() {
 	}
 }
 
-function changeValues(index){
-	console.log("changeValues " + index);
-	if(document != null) {
+function changeValues(index) {
+	if (debug) {
+		console.log("changeValues " + index);
+	}
+	if (document != null) {
 		jsonURL = values[index][0];
 		jsonDebugURL = values[index][1];
 		document.getElementById("title").innerHTML = values[index][2];
